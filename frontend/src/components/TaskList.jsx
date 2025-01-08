@@ -10,6 +10,7 @@ const TaskList = ({ onEdit, tasks, setTasks}) => {
   useEffect(() => {
     try {
         const fetchedTasks = getAllTasks();
+        setError(null);
         setTasks(fetchedTasks);
     } catch (err) {
         setError(err.message);
@@ -19,6 +20,7 @@ const TaskList = ({ onEdit, tasks, setTasks}) => {
   const handleDelete = (taskId) => {
     try {
         deleteTask(taskId);
+        setError(null);
         setTasks(prevTasks => prevTasks.filter(task => task.task_id !== taskId));
     } catch (error) {
         setError(error.message);
@@ -37,6 +39,7 @@ const TaskList = ({ onEdit, tasks, setTasks}) => {
             <th>Due Date</th>
             <th>Priority</th>
             <th>Status</th>
+            <th>User Assigned</th>
             <th>Actions</th>
           </tr>
         </thead>

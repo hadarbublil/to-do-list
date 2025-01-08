@@ -8,10 +8,12 @@ const AddTask = ({ onClose  }) => {
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [priority, setPriority] = useState(1);
+  const [assignedUserId  , setassignedUserId] = useState(1);
+  const [status, setStatus] = useState(1);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(title, description, 1, 1, dueDate);
+    addTask(title, description, assignedUserId, priority, status, dueDate);
     onClose();  // Close the AddTask form after adding the task
 
   };
@@ -58,6 +60,29 @@ const AddTask = ({ onClose  }) => {
             <option value="3">High</option>
             <option value="4">Urgent</option>
           </select>
+        </div>
+        <div className="form-group">
+          <label>Status</label>
+          <select
+            className="form-control"
+            value={status}
+            onChange={(e) => setStatus(parseInt(e.target.value))}
+          >
+            <option value="1">Draft</option>
+            <option value="2">In Progress</option>
+            <option value="3">On Hold</option>
+            <option value="4">Completed</option>
+            <option value="5">Deleted</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Assigned user id</label>
+          <input
+            type="number"
+            className="form-control"
+            value={assignedUserId}
+            onChange={(e) => setassignedUserId(e.target.value)}
+          />
         </div>
         <button type="submit" className="btn btn-primary">Submit</button>
       </form>
