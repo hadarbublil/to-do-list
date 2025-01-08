@@ -1,14 +1,12 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import taskRoutes from './taskRoutes.js';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Sample endpoint
-app.get('/api/message', (req, res) => {
-    res.json({ message: 'Hello from server!' });
-});
+app.use('/api', taskRoutes);
 
 // Start the server
 const PORT = 5000; // use any port that is available
