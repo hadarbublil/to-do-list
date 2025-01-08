@@ -1,63 +1,87 @@
-// Mock database for storing tasks
-let tasks = [];
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const tasksDir = path.join(__dirname, 'tasks');
+if (!fs.existsSync(tasksDir)) {
+  fs.mkdirSync(tasksDir);
+}
 
 // Function to generate unique task ID
 const generateId = () => {
-  return tasks.length > 0 ? Math.max(tasks.map(task => task.task_id)) + 1 : 1;
+  const files = fs.readdirSync(tasksDir);
+  const ids = files.map(file => parseInt(path.basename(file, '.json')));
+  return ids.length > 0 ? Math.max(...ids) + 1 : 1;
 };
 
-// Add a new task
+const saveTaskToFile = (task) => {
+  const filePath = path.join(tasksDir, `${task.task_id}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(task, null, 2));
+};
+
 export const addTask = (title, description, assignedUser, priority, status, due_date) => {
-  const currentTimestamp = Date.now(); // Use current timestamp for create_date and update_date
+  const currentTimestamp = Date.now();
   const newTask = {
     task_id: generateId(),
     title,
     description,
     create_date: currentTimestamp,
     update_date: currentTimestamp,
-    due_date: new Date(due_date).getTime(), // Ensure the due_date is a valid timestamp
+    due_date: new Date(due_date).getTime(),
     assigned_user_id: assignedUser,
-    priority_id: priority, // Priority (1 - Low, 2 - Medium, 3 - High, 4 - Urgent)
-    status_id: status, 
+    priority_id: priority,
+    status_id: status,
   };
-  tasks.push(newTask);
+
+  saveTaskToFile(newTask);
 };
 
 // Update a task's field by ID
 export const updateTask = (task_id, updatedFields) => {
-  const task = tasks.find(task => task.task_id === task_id);
-  if (!task || task.status_id === 5) {
+  const filePath = path.join(tasksDir, `${task_id}.json`);
+  if (!fs.existsSync(filePath)) {
+    throw new Error('Task not found');
+  }
+
+  const task = JSON.parse(fs.readFileSync(filePath));
+
+  if (task.status_id === 5) {
     throw new Error('Task not found or already deleted');
   }
 
   task.update_date = Date.now();
-
   Object.assign(task, updatedFields);
+
+  saveTaskToFile(task);
 };
 
 export const getAllTasks = () => {
-  tasks =  tasks.filter(task => task.status_id !== 5);
-  if (tasks.length === 0) {
-    // throw new Error('No tasks found');
-    return [];
-  }
+  const files = fs.readdirSync(tasksDir);
+  const tasks = files.map(file => {
+    const task = JSON.parse(fs.readFileSync(path.join(tasksDir, file)));
+    return task;
+  }).filter(task => task.status_id !== 5);
+
   return tasks;
 };
 
 // Delete a task by ID
 export const deleteTask = (task_id) => {
-  const taskIndex = tasks.findIndex(task => task.task_id === task_id);
-  if (taskIndex === -1) {
+  const filePath = path.join(tasksDir, `${task_id}.json`);
+  if (!fs.existsSync(filePath)) {
     throw new Error('Task not found');
   }
 
-  // Mark task as deleted (status_id = 5)
-  const deletedTask = tasks[taskIndex];
-  if (deletedTask.status_id === 5) {
-    throw new Error('Task already deleted'); 
+  const task = JSON.parse(fs.readFileSync(filePath));
+
+  if (task.status_id === 5) {
+    throw new Error('Task already deleted');
   }
 
-  deletedTask.status_id = 5;
-  deletedTask.update_date = Date.now(); // Update the date when marking as deleted
-  return null;
+  task.status_id = 5;
+  task.update_date = Date.now();
+  saveTaskToFile(task);
 };
