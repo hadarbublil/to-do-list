@@ -1,7 +1,7 @@
 // EditTask.jsx
 
 import React, { useState, useEffect } from 'react';
-import { updateTask } from '../services/mock_backend';
+import { updateTask } from '../../../backend/db/mock_backend';
 
 const EditTask = ({ task, onTaskUpdated }) => {
   const [title, setTitle] = useState(task.title);

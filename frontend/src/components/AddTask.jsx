@@ -1,7 +1,7 @@
 // AddTask.jsx
 
 import React, { useState } from 'react';
-import { addTask } from '../services/mock_backend';
+import { addTask } from '../../../backend/db/mock_backend';
 
 const AddTask = ({ onClose  }) => {
   const [title, setTitle] = useState('');

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
-import { getAllTasks, deleteTask } from '../services/mock_backend';
+import { getAllTasks, deleteTask } from '../../../backend/db/mock_backend';
 
 const TaskList = ({ onEdit, tasks, setTasks}) => {
   const [error, setError] = useState(null);

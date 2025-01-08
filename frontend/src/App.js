@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import EditTask from './components/EditTask';
-import { getAllTasks } from './services/mock_backend';
+import { getAllTasks } from '../../backend/db/mock_backend';
 
 const App = () => {
   const UIState = {
