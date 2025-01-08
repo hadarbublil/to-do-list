@@ -39,8 +39,12 @@ const App = () => {
   return (
     <div>
       <div className="container">
-        <h1>To-Do List</h1>
-        <button className="btn btn-primary" onClick={handleAddTaskClick}>Add Task</button>
+        <h1 className='text-center display-4 my-4'>To-Do List</h1>
+        <div className="d-flex justify-content-center mb-4">
+          <button className="btn btn-primary btn-lg" onClick={handleAddTaskClick}>
+            Add Task
+          </button>
+        </div>
         {currentState === UIState.ADD_TASK && (
           <AddTask onClose={handleCloseAddTask} />
         )}

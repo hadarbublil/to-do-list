@@ -32,18 +32,18 @@ const TaskList = ({ onEdit, tasks, setTasks}) => {
 
   return (
     <div className="container mt-4">
-      <h2>Tasks List</h2>
+      <h2 className="text-center text-dark mb-4 font-weight-bold">Tasks List</h2>
       {error && <div className="alert alert-danger">{error}</div>}
-      <table className="table table-striped">
+      <table className="table table-striped table-hover">
         <thead>
-          <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>User Assigned</th>
-            <th>Actions</th>
+          <tr className="text-center">
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Due Date</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Status</th>
+            <th scope="col">User Assigned</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
