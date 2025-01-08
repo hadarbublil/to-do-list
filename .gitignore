@@ -1,0 +1,36 @@
+# Frontend dependencies
+/frontend/node_modules/
+/frontend/.parcel-cache/
+/frontend/.next/
+
+# Build files
+/frontend/build/
+/frontend/dist/
+
+# Backend dependencies
+/backend/node_modules/
+/backend/yarn.lock
+
+# Local environment files
+/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+*.tmp
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Operating system files
+Thumbs.db
+.DS_Store
+
+# Python-specific files (if applicable in backend)
+backend/__pycache__/
+*.py[cod]
+*.pyo
+
