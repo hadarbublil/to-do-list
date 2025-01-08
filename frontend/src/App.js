@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 import EditTask from './components/EditTask';
-import { getAllTasks } from '../../backend/db/mock_backend';
+import { getAllTasks } from './services/api';
 
 const App = () => {
   const UIState = {
@@ -22,14 +22,14 @@ const App = () => {
     setCurrentState(UIState.EDIT_TASK);
   };
 
-  const handleCloseEdit = () => {
+  const handleCloseEdit = async () => {
     setCurrentState(UIState.NONE);
-    setTasks(getAllTasks());
+    setTasks(await getAllTasks());
   };
 
-  const handleCloseAddTask = () => {
+  const handleCloseAddTask = async () => {
     setCurrentState(UIState.NONE);   
-    setTasks(getAllTasks());
+    setTasks(await getAllTasks());
   };
 
   const handleAddTaskClick = () => {

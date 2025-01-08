@@ -2,24 +2,27 @@
 
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
-import { getAllTasks, deleteTask } from '../../../backend/db/mock_backend';
+import { getAllTasks, deleteTask } from '../services/api';
 
 const TaskList = ({ onEdit, tasks, setTasks}) => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    try {
-        const fetchedTasks = getAllTasks();
-        setError(null);
-        setTasks(fetchedTasks);
-    } catch (err) {
-        setError(err.message);
-    }
-  }, []);
+    const fetchTasks = async () => {
+        try {
+            const fetchedTasks = await getAllTasks();
+            setError(null);
+            setTasks(fetchedTasks);
+        } catch (err) {
+            setError(err.message);
+        }
+    };
+    fetchTasks(); 
+  });
 
-  const handleDelete = (taskId) => {
+  const handleDelete = async (taskId) => {
     try {
-        deleteTask(taskId);
+        await deleteTask(taskId);
         setError(null);
         setTasks(prevTasks => prevTasks.filter(task => task.task_id !== taskId));
     } catch (error) {

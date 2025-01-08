@@ -1,7 +1,7 @@
 // EditTask.jsx
 
 import React, { useState, useEffect } from 'react';
-import { updateTask } from '../../../backend/db/mock_backend';
+import { updateTask } from '../services/api';
 
 const EditTask = ({ task, onTaskUpdated }) => {
   const [title, setTitle] = useState(task.title);
@@ -21,10 +21,10 @@ const EditTask = ({ task, onTaskUpdated }) => {
     setAssignedUserId(task.assigned_user_id)
   }, [task]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        updateTask(task.task_id, { title, description, status_id: status, due_date: new Date(dueDate).getTime(), priority_id: priority,  assigned_user_id: assignedUserId});
+        await updateTask(task.task_id, { title, description, status_id: status, due_date: new Date(dueDate).getTime(), priority_id: priority,  assigned_user_id: assignedUserId});
         onTaskUpdated(); // Refresh task list in parent component
     } catch (err) {
         setError(err.message);

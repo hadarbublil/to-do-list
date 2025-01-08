@@ -1,7 +1,7 @@
 // AddTask.jsx
 
 import React, { useState } from 'react';
-import { addTask } from '../../../backend/db/mock_backend';
+import { addTask } from '../services/api';
 
 const AddTask = ({ onClose  }) => {
   const [title, setTitle] = useState('');
@@ -11,9 +11,9 @@ const AddTask = ({ onClose  }) => {
   const [assignedUserId  , setassignedUserId] = useState(1);
   const [status, setStatus] = useState(1);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addTask(title, description, assignedUserId, priority, status, dueDate);
+    await addTask(title, description, assignedUserId, priority, status, dueDate);
     onClose();  // Close the AddTask form after adding the task
 
   };
