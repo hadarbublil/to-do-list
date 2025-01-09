@@ -1,32 +1,34 @@
 // TaskList.jsx
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Task from './Task';
 import { getAllTasks, deleteTask } from '../services/api';
+import useError from '../hooks/useError';
 
 const TaskList = ({ onEdit, tasks, setTasks}) => {
-  const [error, setError] = useState(null);
+  const { error, handleError, clearError } = useError();
 
   useEffect(() => {
     const fetchTasks = async () => {
-        try {
-            const fetchedTasks = await getAllTasks();
-            setError(null);
-            setTasks(fetchedTasks);
-        } catch (err) {
-            setError(err.message);
-        }
+      try {
+        const fetchedTasks = await getAllTasks();
+        setTasks(fetchedTasks);
+        clearError(); 
+      } catch (err) {
+        handleError(err); 
+      }
     };
-    fetchTasks(); 
-  });
+    fetchTasks();
+  }, [setTasks, handleError, clearError]); 
+
 
   const handleDelete = async (taskId) => {
     try {
-        await deleteTask(taskId);
-        setError(null);
-        setTasks(prevTasks => prevTasks.filter(task => task.task_id !== taskId));
+      await deleteTask(taskId);
+      setTasks(prevTasks => prevTasks.filter(task => task.task_id !== taskId));
+      clearError(); 
     } catch (error) {
-        setError(error.message);
+      handleError(error); 
     }
   };
 
@@ -37,13 +39,13 @@ const TaskList = ({ onEdit, tasks, setTasks}) => {
       <table className="table table-striped table-hover">
         <thead>
           <tr className="text-center">
-            <th scope="col">Title</th>
-            <th scope="col">Description</th>
-            <th scope="col">Due Date</th>
-            <th scope="col">Priority</th>
-            <th scope="col">Status</th>
-            <th scope="col">User Assigned</th>
-            <th scope="col">Actions</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>User Assigned</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>

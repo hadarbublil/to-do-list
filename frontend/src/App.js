@@ -40,6 +40,10 @@ const App = () => {
     <div>
       <div className="container">
         <h1 className='text-center display-4 my-4'>To-Do List</h1>
+        <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
+        {currentState === UIState.EDIT_TASK && editingTask && (
+          <EditTask task={editingTask} onTaskUpdated={handleCloseEdit} />
+        )}
         <div className="d-flex justify-content-center mb-4">
           <button className="btn btn-primary btn-lg" onClick={handleAddTaskClick}>
             Add Task
@@ -49,11 +53,7 @@ const App = () => {
           <AddTask onClose={handleCloseAddTask} />
         )}
 
-        {currentState === UIState.EDIT_TASK && editingTask && (
-          <EditTask task={editingTask} onTaskUpdated={handleCloseEdit} />
-        )}
-
-        <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
+       
       </div>
     </div>
   );
