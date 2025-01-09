@@ -13,7 +13,7 @@ const App = () => {
     NONE: 'NONE',
   };
 
-  const [currentState, setCurrentState] = useState(UIState.VIEW_TASKS);
+  const [currentState, setCurrentState] = useState(UIState.NONE);
   const [tasks, setTasks] = useState([]);
   const [editingTask, setEditingTask] = useState(null);
 
@@ -34,16 +34,21 @@ const App = () => {
   return (
     <div>
       <div className="container">
-        <h1 className='text-center display-4 my-4'>To-Do List</h1>
+        <h1 className='text-dark font-weight-bold text-center display-4 my-4'>To-Do List</h1>
+        <div className="d-flex align-items-center mb-4">
+          <h2 className="text-dark font-weight-bold text-center flex-grow-1">Tasks List</h2>
+          {currentState === UIState.NONE && (
+            <button className="btn btn-primary btn-lg ml-auto" style={{position: "absolute"}} onClick={handleAddTaskClick}>
+            Add Task
+          </button>
+          )}
+        </div>
+        
         <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
         {currentState === UIState.EDIT_TASK && editingTask && (
           <EditTask task={editingTask} onTaskUpdated={handleClose} />
         )}
-        <div className="d-flex justify-content-center mb-4">
-          <button className="btn btn-primary btn-lg" onClick={handleAddTaskClick}>
-            Add Task
-          </button>
-        </div>
+       
         {currentState === UIState.ADD_TASK && (
           <AddTask onClose={handleClose} />
         )}

@@ -14,7 +14,7 @@ const Task = ({ task, onDelete, onEdit }) => {
       <td>{statusLabels[task.status_id - 1]}</td>
       <td>{task.assigned_user_id}</td>
       <td>
-        <button className="btn btn-outline-success custom-border mr-3 mr-3" data-bs-toggle="button" onClick={() => onEdit(task)}>Edit</button>
+        <button className="btn btn-outline-success custom-border me-3" data-bs-toggle="button" onClick={() => onEdit(task)}>Edit</button>
         <button className="btn btn-outline-danger custom-border" onClick={() => onDelete(task.task_id)}>Delete</button>
       </td>
     </tr>

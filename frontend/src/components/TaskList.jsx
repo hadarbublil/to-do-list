@@ -44,7 +44,6 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
 
   return (
     <div className="container mt-4">
-      <h2 className="text-left text-dark mb-4 font-weight-bold">Tasks List</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <table className="table table-striped table-hover">
         <thead>
@@ -72,21 +71,21 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
       {/* Pagination Controls */}
       <div className="d-flex justify-content-center mt-3">
         <button
-          className="btn btn-outline-primary mr-2"
+          className="btn btn-outline-primary mr-2 mx-2"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
         >
-          Previous
+          &lt;
         </button>
         <span className="align-self-center">
           Page {currentPage} of {totalPages}
         </span>
         <button
-          className="btn btn-outline-primary ml-2"
+          className="btn btn-outline-primary ml-2 mx-2"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          Next
+          	&gt;
         </button>
       </div>
     </div>
