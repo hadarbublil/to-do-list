@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules # Ensure node_modules works correctly
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend:/usr/src/app
+    restart: always
