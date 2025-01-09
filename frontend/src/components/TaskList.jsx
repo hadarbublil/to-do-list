@@ -87,6 +87,8 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
             <th onClick={() => handleSort('title')}>Title</th>
             <th onClick={() => handleSort('description')}>Description</th>
             <th onClick={() => handleSort('due_date')}>Due Date</th>
+            <th onClick={() => handleSort('create_date')}>Create Date</th>
+            <th onClick={() => handleSort('update_date')}>Update Date</th>
             <th onClick={() => handleSort('priority_id')}>Priority</th>
             <th onClick={() => handleSort('status_id')}>Status</th>
             <th onClick={() => handleSort('assigned_user_id')}>User Assigned</th>

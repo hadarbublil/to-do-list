@@ -1,5 +1,5 @@
 .custom-border {
-    border-width: 2px; /* Adjust the width as needed */
+    border-width: 2px; 
 }
 
 .text-ellipsis {
@@ -7,4 +7,66 @@
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 150px; 
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    width: 100px; 
+    text-align: center; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+
+/* Priority colors */
+.priority-1 { /* Low */
+    background-color: #d4edda; /* Light green */
+    color: #155724;
+}
+  
+.priority-2 { /* Medium */
+    background-color: #d1ecf1; /* Light blue */
+    color: #0c5460;
+}
+  
+.priority-3 { /* High */
+    background-color: #ffe8cc; /* Light orange */
+    color: #856404;
+}
+  
+.priority-4 { /* Urgent */
+    background-color: #f8d7da; /* Light red */
+    color: #721c24;
+}
+
+  /* Status colors */
+.status-1 {
+    background-color: #e0e0e0; /* Draft: grey */
+    color: #616161;
+}
+  
+.status-2 {
+    background-color: #cfe2ff; /* In Progress: light blue */
+    color: #084298;
+}
+  
+.status-3 {
+    background-color: #ffeeba; /* On Hold: yellow */
+    color: #856404;
+}
+  
+.status-4 {
+    background-color: #d4edda; /* Completed: green */
+    color: #155724;
+}
+  
+.status-5 {
+    background-color: #f8d7da; /* Deleted: red */
+    color: #721c24;
 }
