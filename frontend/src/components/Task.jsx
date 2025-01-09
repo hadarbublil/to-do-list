@@ -6,9 +6,9 @@ const Task = ({ task, onDelete, onEdit }) => {
   const priorityLabels = ['Low', 'Medium', 'High', 'Urgent'];
   const statusLabels = ['Draft', 'In Progress', 'On Hold', 'Completed', 'Deleted'];
   return (
-    <tr className="text-center">
-      <td>{task.title}</td>
-      <td>{task.description}</td>
+    <tr className="text-left">
+      <td title={task.title} className='text-ellipsis'>{task.title}</td>
+      <td title={task.description} className='text-ellipsis'>{task.description}</td>
       <td>{new Date(task.due_date).toLocaleDateString()}</td>
       <td>{priorityLabels[task.priority_id - 1]}</td>
       <td>{statusLabels[task.status_id - 1]}</td>

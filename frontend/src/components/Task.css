@@ -1,3 +1,10 @@
 .custom-border {
     border-width: 2px; /* Adjust the width as needed */
 }
+
+.text-ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Adjust width as needed */
+}
