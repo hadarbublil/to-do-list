@@ -1,6 +1,7 @@
 # Task Management App
 
 Welcome to the Task Management App! This project provides a simple and interactive way to manage tasks. Below you'll find information on how to run, use, and understand the application.
+
 ![Description of the image](assets/ToDoList.png)
 ---
 
