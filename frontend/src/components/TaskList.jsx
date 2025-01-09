@@ -5,8 +5,13 @@ import useError from '../hooks/useError';
 
 const TaskList = ({ onEdit, tasks, setTasks }) => {
   const { error, handleError, clearError } = useError();
-  const [currentPage, setCurrentPage] = useState(1); 
-  const tasksPerPage = 10; 
+  const [currentPage, setCurrentPage] = useState(1);
+  const tasksPerPage = 10;
+
+  // New state variables for filtering and sorting
+  const [filter, setFilter] = useState('');
+  const [sortField, setSortField] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc');
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -31,10 +36,27 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
     }
   };
 
-  // Pagination Logic
-  const totalPages = Math.ceil(tasks.length / tasksPerPage);
+  // Filtering logic
+  const filteredTasks = tasks.filter((task) =>
+    Object.values(task).some((value) =>
+      value.toString().toLowerCase().includes(filter.toLowerCase())
+    )
+  );
+
+  // Sorting logic
+  const sortedTasks = [...filteredTasks].sort((a, b) => {
+    if (!sortField) return 0; // No sorting
+    const aValue = a[sortField];
+    const bValue = b[sortField];
+    if (aValue < bValue) return sortOrder === 'asc' ? -1 : 1;
+    if (aValue > bValue) return sortOrder === 'asc' ? 1 : -1;
+    return 0;
+  });
+
+  // Pagination logic
+  const totalPages = Math.ceil(sortedTasks.length / tasksPerPage);
   const startIndex = (currentPage - 1) * tasksPerPage;
-  const currentTasks = tasks.slice(startIndex, startIndex + tasksPerPage);
+  const currentTasks = sortedTasks.slice(startIndex, startIndex + tasksPerPage);
 
   const goToPage = (page) => {
     if (page > 0 && page <= totalPages) {
@@ -42,18 +64,32 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
     }
   };
 
+  const handleSort = (field) => {
+    setSortOrder((prevOrder) => (prevOrder === 'asc' ? 'desc' : 'asc'));
+    setSortField(field);
+  };
+
   return (
     <div className="container mt-4">
       {error && <div className="alert alert-danger">{error}</div>}
+      <div className="mb-3">
+        <input
+          type="text"
+          placeholder="Filter tasks..."
+          className="form-control"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+        />
+      </div>
       <table className="table table-striped table-hover">
         <thead>
           <tr className="text-left">
-            <th>Title</th>
-            <th>Description</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Status</th>
-            <th>User Assigned</th>
+            <th onClick={() => handleSort('title')}>Title</th>
+            <th onClick={() => handleSort('description')}>Description</th>
+            <th onClick={() => handleSort('due_date')}>Due Date</th>
+            <th onClick={() => handleSort('priority_id')}>Priority</th>
+            <th onClick={() => handleSort('status_id')}>Status</th>
+            <th onClick={() => handleSort('assigned_user_id')}>User Assigned</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -85,7 +121,7 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === totalPages}
         >
-          	&gt;
+          &gt;
         </button>
       </div>
     </div>
