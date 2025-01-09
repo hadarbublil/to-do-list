@@ -25,7 +25,6 @@ const EditTask = ({ task, onTaskUpdated }) => {
     const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Call updateTask API
       await updateTask(task.task_id, {
         title: formState.title,
         description: formState.description,

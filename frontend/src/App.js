@@ -22,13 +22,8 @@ const App = () => {
     setCurrentState(UIState.EDIT_TASK);
   };
 
-  const handleCloseEdit = async () => {
+  const handleClose = async () => {
     setCurrentState(UIState.NONE);
-    setTasks(await getAllTasks());
-  };
-
-  const handleCloseAddTask = async () => {
-    setCurrentState(UIState.NONE);   
     setTasks(await getAllTasks());
   };
 
@@ -42,7 +37,7 @@ const App = () => {
         <h1 className='text-center display-4 my-4'>To-Do List</h1>
         <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
         {currentState === UIState.EDIT_TASK && editingTask && (
-          <EditTask task={editingTask} onTaskUpdated={handleCloseEdit} />
+          <EditTask task={editingTask} onTaskUpdated={handleClose} />
         )}
         <div className="d-flex justify-content-center mb-4">
           <button className="btn btn-primary btn-lg" onClick={handleAddTaskClick}>
@@ -50,7 +45,7 @@ const App = () => {
           </button>
         </div>
         {currentState === UIState.ADD_TASK && (
-          <AddTask onClose={handleCloseAddTask} />
+          <AddTask onClose={handleClose} />
         )}
 
        
