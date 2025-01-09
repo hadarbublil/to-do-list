@@ -34,15 +34,13 @@ const App = () => {
       <div className="container">
         <h1 className='text-dark font-weight-bold text-center display-4 my-4'>To-Do List</h1>
         <div className="d-flex align-items-center mb-4">
-          <h2 className="text-dark font-weight-bold text-center flex-grow-1">Tasks List</h2>
+          
           {currentState === UIState.NONE && (
             <button className="btn btn-primary btn-lg ml-auto" style={{position: "absolute"}} onClick={handleAddTaskClick}>
             Add Task
           </button>
           )}
         </div>
-        
-        <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
         {currentState === UIState.EDIT_TASK && editingTask && (
           <EditTask task={editingTask} onTaskUpdated={handleClose} />
         )}
@@ -50,8 +48,9 @@ const App = () => {
         {currentState === UIState.ADD_TASK && (
           <AddTask onClose={handleClose} />
         )}
-
-       
+        <h2 className="text-dark font-weight-bold text-center flex-grow-1">Tasks List</h2>
+        <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
+        
       </div>
     </div>
   );

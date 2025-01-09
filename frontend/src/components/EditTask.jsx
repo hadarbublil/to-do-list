@@ -41,7 +41,7 @@ const EditTask = ({ task, onTaskUpdated }) => {
   };
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 col-6">
       <h2>Edit Task</h2>
       {error && <div className="alert alert-danger">{error}</div>}
       <TaskForm
