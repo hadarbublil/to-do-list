@@ -5,8 +5,8 @@ import useError from '../hooks/useError';
 
 const TaskList = ({ onEdit, tasks, setTasks }) => {
   const { error, handleError, clearError } = useError();
-  const [currentPage, setCurrentPage] = useState(1); // Current page
-  const tasksPerPage = 10; // Number of tasks per page
+  const [currentPage, setCurrentPage] = useState(1); 
+  const tasksPerPage = 10; 
 
   useEffect(() => {
     const fetchTasks = async () => {

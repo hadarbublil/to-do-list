@@ -1,11 +1,11 @@
 {
-  "task_id": 6,
-  "title": "eferw",
-  "description": "sfesg",
-  "create_date": 1736372641368,
-  "update_date": 1736375829487,
-  "due_date": -27080352000000,
-  "assigned_user_id": 1,
-  "priority_id": 1,
-  "status_id": 5
+    "task_id": 6,
+    "title": "Add user authentication",
+    "description": "Implement JWT token.",
+    "create_date": 1736363100000,
+    "update_date": 1736364100000,
+    "due_date": 7956835200000,
+    "assigned_user_id": "3",
+    "priority_id": 1,
+    "status_id": 2
 }

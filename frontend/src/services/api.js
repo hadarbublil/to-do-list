@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api/tasks';
 
-// Add a new task
 export const addTask = async (title, description, assignedUser, priority, status, due_date) => {
     try {
         const newTask = {
@@ -19,7 +18,6 @@ export const addTask = async (title, description, assignedUser, priority, status
     }
 };
 
-// Update a task's field by ID
 export const updateTask = async (task_id, updatedFields) => {
     try {
         await axios.put(`${API_URL}/${task_id}`, updatedFields);
@@ -28,7 +26,6 @@ export const updateTask = async (task_id, updatedFields) => {
     }
 };
 
-// Get all tasks
 export const getAllTasks = async () => {
     try {
         const response = await axios.get(API_URL);
@@ -38,7 +35,6 @@ export const getAllTasks = async () => {
     }
 };
 
-// Delete a task by ID
 export const deleteTask = async (task_id) => {
     try {
         await axios.delete(`${API_URL}/${task_id}`);

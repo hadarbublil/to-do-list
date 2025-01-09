@@ -39,7 +39,6 @@ export const addTask = (title, description, assignedUser, priority, status, due_
   saveTaskToFile(newTask);
 };
 
-// Update a task's field by ID
 export const updateTask = (task_id, updatedFields) => {
   const filePath = path.join(tasksDir, `${task_id}.json`);
   if (!fs.existsSync(filePath)) {
@@ -68,7 +67,6 @@ export const getAllTasks = () => {
   return tasks;
 };
 
-// Delete a task by ID
 export const deleteTask = (task_id) => {
   const filePath = path.join(tasksDir, `${task_id}.json`);
   if (!fs.existsSync(filePath)) {
