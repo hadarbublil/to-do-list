@@ -5,15 +5,18 @@ const router = express.Router();
 
 // Add task
 router.post('/tasks', async (req, res) => {
-    try {
-        const { title, description, assignedUser = 1, priority = 1, status = 1, due_date } = req.body;
-        if (!title || !description || !due_date) return res.status(400).json({ error: 'Missing required fields' });
+  try {
+      const { task } = req.body;  
+      if (!task || !task.title || !task.description || !task.due_date) {
+          return res.status(400).json({ error: 'Missing required fields' });
+      }
 
-        const task = await addTask(title, description, assignedUser, priority, status, due_date);
-        res.status(201).json({ message: 'Task created successfully', task });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+      const createdTask = await addTask(task);
+
+      res.status(201).json({ message: 'Task created successfully', task: createdTask });
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
 });
 
 // Get all tasks

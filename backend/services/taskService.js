@@ -1,14 +1,14 @@
 import Task from '../models/Task.js';
 import { Op } from 'sequelize'; 
 
-export const addTask = async (title, description, assignedUser, priority, status, due_date) => {
+export const addTask = async (task) => {
   return await Task.create({
-    title,
-    description,
-    due_date,
-    assigned_user_id: assignedUser,
-    priority_id: priority,
-    status_id: status,
+    title: task.title,
+    description: task.description,
+    due_date: task.due_date,
+    assigned_user_id: task.assignedUser,
+    priority_id: task.priority,
+    status_id: task.status,
   });
 };
 

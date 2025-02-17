@@ -12,7 +12,7 @@ export const addTask = async (title, description, assignedUser, priority, status
           status,
           due_date: new Date(due_date).getTime(),
         };
-        await axios.post(API_URL, newTask);
+        await axios.post(API_URL, { task: newTask });
     } catch (error) {
         throw new Error(error.response?.data?.error || 'Failed to add task');
     }
