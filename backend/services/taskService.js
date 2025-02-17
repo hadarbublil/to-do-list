@@ -1,5 +1,6 @@
 import Task from '../models/Task.js';
 import { Op } from 'sequelize'; 
+import { validateDueDate } from '../taskRoutes.js';
 
 export const addTask = async (task) => {
   return await Task.create({
@@ -33,3 +34,5 @@ export const deleteTask = async (task_id) => {
 
   await task.update({ status_id: 5, update_date: new Date() });
 };
+
+
