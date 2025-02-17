@@ -24,7 +24,7 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
       }
     };
     fetchTasks();
-  }, [setTasks, handleError, clearError]);
+  }, []);
 
   const handleDelete = async (taskId) => {
     try {
