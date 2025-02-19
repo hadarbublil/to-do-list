@@ -30,6 +30,7 @@ export const updateTask = async (task_id, updatedFields) => {
 // Delete task (soft delete by updating status)
 export const deleteTask = async (task_id) => {
   const task = await Task.findByPk(task_id);
+  console.log(`task=${task}`);
   if (!task || task.status_id === 5) throw new Error('Task already deleted');
 
   await task.update({ status_id: 5, update_date: new Date() });
