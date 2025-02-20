@@ -54,7 +54,7 @@ export const getTodayTasks = async () => {
     return tasks.map(task => `${task.get('title')}: ${task.get('description')}`);
 
   } catch (error) {
-
+    
     console.error('Error fetching today’s tasks:', error);
     return [];
   }
