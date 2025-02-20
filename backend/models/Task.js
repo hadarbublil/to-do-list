@@ -13,6 +13,7 @@ const Task = sequelize.define('Task', {
   },
   description: { 
     type: DataTypes.TEXT, 
+    defaultValue: "", 
     allowNull: false 
   },
   create_date: { 

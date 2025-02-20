@@ -37,6 +37,4 @@ cron.schedule('0 8 * * *', () => {
   timezone: 'UTC'
 });
 
-sendDailyTaskReminder();
-
 export default app;

@@ -20,7 +20,8 @@ const validateId = (id, message) => {
 router.post('/tasks', async (req, res) => {
   try {
       const { task } = req.body;  
-      if (!task || !task.title || !task.description || !task.due_date) {
+      if (!task || !task.title || !task.due_date) {
+        console.log("Received task data:", task);
           return res.status(400).json({ error: 'Missing required fields' });
       }
       validateDueDate(task.due_date);
