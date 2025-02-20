@@ -1,6 +1,5 @@
 import Task from '../models/Task.js';
 import { Op } from 'sequelize'; 
-import { validateDueDate } from '../taskRoutes.js';
 
 export const addTask = async (task) => {
   return await Task.create({
@@ -36,4 +35,28 @@ export const deleteTask = async (task_id) => {
   await task.update({ status_id: 5, update_date: new Date() });
 };
 
+export const getTodayTasks = async () => {
+  try {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const tasks = await Task.findAll({
+      where: {
+        due_date: {
+          [Op.gte]: today, // Due date is today or later
+          [Op.lt]: new Date(today.getTime() + 24 * 60 * 60 * 1000), // Before tomorrow
+        },
+        status_id: { [Op.ne]: 5 } 
+      },
+      attributes: ['title', 'description'], 
+    });
+    console.log('tasks in getTodayTasks:', JSON.stringify(tasks, null, 2));
+    return tasks.map(task => `${task.get('title')}: ${task.get('description')}`);
+
+  } catch (error) {
+
+    console.error('Error fetching today’s tasks:', error);
+    return [];
+  }
+};
 
