@@ -4,7 +4,8 @@ import taskRoutes from './taskRoutes.js';
 import sequelize from './config/database.js';
 import cron from 'node-cron';
 
-import sendDailyTaskReminder from './services/sendWhatsApp.js';
+import { sendDailyTaskReminderWhatsApp } from './services/sendWhatsApp.js';
+import { sendDailyTaskReminderTelegram } from './services/sendTelegram.js';
 
 import dotenv from 'dotenv';
 
@@ -30,9 +31,14 @@ const syncDatabase = async () => {
 
 syncDatabase();
 
-cron.schedule('0 8 * * *', () => {
-  console.log('Sending daily WhatsApp task reminder...');
-  sendDailyTaskReminder();
+const sendReminders = async () => {
+  console.log('Sending daily task reminders...');
+  await sendDailyTaskReminderWhatsApp();
+  await sendDailyTaskReminderTelegram();
+};
+
+cron.schedule('0 8 * * *', async () => {
+  await sendReminders();
 }, {
   timezone: 'UTC'
 });
