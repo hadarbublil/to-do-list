@@ -1,7 +1,7 @@
 import TelegramBot from 'node-telegram-bot-api';
 import dotenv from 'dotenv';
 import { sendDailyTaskReminder } from './sendDailyTasks.js';
-import { addTask, deleteTask, getTodayTasks } from './taskService.js';
+import { addTask, deleteTask, getTodayTasks, updateTask } from './taskService.js';
 import axios from 'axios';
 
 dotenv.config();
@@ -92,6 +92,37 @@ export async function handleToday(chatId) {
   }
 }
 
+export async function handleEdit(chatId, text) {
+    const parts = text.split(' '); 
+    if (parts.length < 2) {
+      bot.sendMessage(chatId, 'Please provide a task ID and at least one field to edit. Example: edit 1 title=New Title');
+      return;
+    }
+  
+    const taskId = parts[1]; 
+    const updatedFields = {};
+  
+    
+    for (let i = 2; i < parts.length; i++) {
+      const [key, value] = parts[i].split('=');
+      if (key && value) {
+        updatedFields[key] = value; 
+      }
+    }
+  
+    if (Object.keys(updatedFields).length === 0) {
+      bot.sendMessage(chatId, 'No valid fields provided to update. Example: edit 1 title=New Title');
+      return;
+    }
+  
+    try {
+      await updateTask(taskId, updatedFields);
+      bot.sendMessage(chatId, `✅ Task with ID ${taskId} has been updated.`);
+    } catch (error) {
+      bot.sendMessage(chatId, 'Error updating task. Please try again.');
+    }
+}
+
 export async function handleTelegramMessage(chatId, text) {
   if (text.startsWith('add')) {
     await handleAdd(chatId, text);
@@ -101,6 +132,8 @@ export async function handleTelegramMessage(chatId, text) {
     await handleToday(chatId);
   } else if (text === 'start') {
     bot.sendMessage(chatId, 'Welcome to your task manager bot! Use the following commands:\n\nadd [task_name] - Add a task\ndelete [task_id] - Delete a task\ntoday - Get today\'s tasks');
+  } else if (text.startsWith('edit')) { 
+    await handleEdit(chatId, text);
   } else {
     bot.sendMessage(chatId, 'I didn\'t understand that command. Try /start for available commands.');
   }
