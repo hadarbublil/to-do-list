@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { updateTask } from '../services/api';
+import { updateTask } from '../services/tasksApi';
 import TaskForm from './TaskForm';
 import useTaskForm from '../hooks/useTasksForm';
 import useError from '../hooks/useError';

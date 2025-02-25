@@ -2,6 +2,7 @@
 
 import React from 'react';
 import './Task.css';
+
 const Task = ({ task, onDelete, onEdit }) => {
   const priorityLabels = ['Low', 'Medium', 'High', 'Urgent'];
   const statusLabels = ['Draft', 'In Progress', 'On Hold', 'Completed', 'Deleted'];

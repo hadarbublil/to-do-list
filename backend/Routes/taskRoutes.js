@@ -1,5 +1,6 @@
 import express from 'express';
-import { addTask, updateTask, getAllTasks, deleteTask } from './services/taskService.js';
+import { addTask, updateTask, getAllTasks, deleteTask } from '../services/taskService.js';
+import { authenticate } from '../controllers/authController.js';
 
 const router = express.Router();
 
@@ -17,7 +18,7 @@ const validateId = (id, message) => {
 };
 
 // Add task
-router.post('/tasks', async (req, res) => {
+router.post('/tasks',authenticate, async (req, res) => {
   try {
       const { task } = req.body;  
       if (!task || !task.title || !task.due_date) {
@@ -38,7 +39,7 @@ router.post('/tasks', async (req, res) => {
 });
 
 // Get all tasks
-router.get('/tasks', async (req, res) => {
+router.get('/tasks',authenticate, async (req, res) => {
     try {
         const tasks = await getAllTasks();
         res.status(200).json(tasks);
@@ -48,7 +49,7 @@ router.get('/tasks', async (req, res) => {
 });
 
 // Update task
-router.put('/tasks/:id', async (req, res) => {
+router.put('/tasks/:id', authenticate, async (req, res) => {
     try {
         const task_id = parseInt(req.params.id);
         validateId(task_id, 'Invalid task ID');
@@ -62,7 +63,7 @@ router.put('/tasks/:id', async (req, res) => {
 });
 
 // Delete task
-router.delete('/tasks/:id', async (req, res) => {
+router.delete('/tasks/:id', authenticate, async (req, res) => {
     try {
         const task_id = parseInt(req.params.id);
         validateId(task_id, 'Invalid task ID');

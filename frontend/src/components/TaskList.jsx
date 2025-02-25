@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Task from './Task';
-import { getAllTasks, deleteTask } from '../services/api';
+import { getAllTasks, deleteTask } from '../services/tasksApi';
 import useError from '../hooks/useError';
+
 
 const TaskList = ({ onEdit, tasks, setTasks }) => {
   const { error, handleError, clearError } = useError();
   const [currentPage, setCurrentPage] = useState(1);
   const tasksPerPage = 10;
 
-  // New state variables for filtering and sorting
   const [filter, setFilter] = useState('');
   const [sortField, setSortField] = useState('');
   const [sortOrder, setSortOrder] = useState('asc');

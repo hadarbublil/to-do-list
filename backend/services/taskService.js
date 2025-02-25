@@ -1,16 +1,30 @@
 import Task from '../models/Task.js';
 import { Op } from 'sequelize'; 
+import User from '../models/User.js';
 
 export const addTask = async (task) => {
-  return await Task.create({
-    title: task.title,
-    description: task.description,
-    due_date: task.due_date,
-    assigned_user_id: task.assignedUser,
-    priority_id: task.priority,
-    status_id: task.status,
-  });
-};
+    // const user = await User.findByPk(userId);
+    // const assignedUser = await User.findByPk(task.assignedUser);
+  
+    // if (!assignedUser || !user) {
+    //   throw new Error("Invalid user assignment");
+    // }
+  
+    // if (user.channel_id !== assignedUser.channel_id) {
+    //   throw new Error("Users must belong to the same channel to assign tasks");
+    // }
+  
+    return await Task.create({
+      title: task.title,
+      description: task.description,
+      due_date: task.due_date,
+      assigned_user_id: task.assignedUser,
+      priority_id: task.priority,
+      status_id: task.status,
+      channel_id: user.channel_id, 
+    });
+  };
+  
 
 export const getAllTasks = async () => {
   return await Task.findAll({

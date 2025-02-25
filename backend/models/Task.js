@@ -7,6 +7,10 @@ const Task = sequelize.define('Task', {
     autoIncrement: true, 
     primaryKey: true 
   },
+  // channel_id: { 
+  //   type: DataTypes.INTEGER,
+  //   allowNull: false,
+  // },
   title: { 
     type: DataTypes.STRING, 
     allowNull: false 
@@ -47,5 +51,13 @@ const Task = sequelize.define('Task', {
   timestamps: false, // Since we manually track create_date and update_date
   tableName: 'tasks', 
 });
+
+Task.associate = (models) => {
+  Task.belongsToMany(models.User, {
+    through: 'task_user',
+    as: 'users',
+    foreignKey: 'taskId',
+  });
+};
 
 export default Task;

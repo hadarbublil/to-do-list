@@ -1,8 +1,9 @@
 import express from 'express';
 import cors from 'cors';
-import taskRoutes from './taskRoutes.js';
+import taskRoutes from './Routes/taskRoutes.js';
 import sequelize from './config/database.js';
 import cron from 'node-cron';
+import authRoutes from './Routes/authRoutes.js';
 
 import { sendDailyTaskReminderWhatsApp } from './services/sendWhatsApp.js';
 import { sendDailyTaskReminderTelegram } from './services/sendTelegram.js';
@@ -12,14 +13,16 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
-
 app.use(cors());
 app.use(express.json());
+
+app.use('/auth', authRoutes);
 app.use('/api', taskRoutes);
+
 
 const syncDatabase = async () => {
   try {
-    await sequelize.sync();  // Sync the database
+    await sequelize.sync();  
     console.log('Database synced!');
     
     const PORT = 5000;

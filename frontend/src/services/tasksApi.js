@@ -28,7 +28,13 @@ export const updateTask = async (task_id, updatedFields) => {
 
 export const getAllTasks = async () => {
     try {
-        const response = await axios.get(API_URL);
+        const token = localStorage.getItem('token'); 
+        console.log(`token in getAllTasks = ${token}`);
+        const response = await axios.get(`${API_URL}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            },
+        });
         return response.data.filter(task => task.status_id !== 5);
     } catch (error) {
         throw new Error(error.response?.data?.error || 'Failed to fetch tasks');
