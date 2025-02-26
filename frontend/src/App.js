@@ -1,4 +1,3 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskManager from './components/TaskManager';
@@ -14,7 +13,6 @@ const App = () => {
     <Router> 
       <AuthProvider> 
         <div>
-          <h1 className='text-dark font-weight-bold text-center display-4 my-4'>To-Do List</h1>
           <AuthenticatedRoutes />
         </div>
       </AuthProvider> 
@@ -23,8 +21,6 @@ const App = () => {
 };
 
 const AuthenticatedRoutes = () => {
-  // const { user } = useContext(AuthContext); 
-  // console.log(user);
   return (
       <Routes>
         <Route element={<Layout />}>

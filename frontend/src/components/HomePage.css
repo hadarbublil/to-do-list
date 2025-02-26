@@ -1,0 +1,64 @@
+/* Full-page layout */
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f8ff;
+    padding-top: 70px;
+    min-height: 100vh;
+  }
+  
+  /* Central content styling */
+  .homepage-content {
+    text-align: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+  }
+  
+  
+  /* Paragraph styling */
+  .homepage-content p {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  /* Button group styling */
+  .button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Button styles */
+  .btn-primary,
+  .btn-secondary {
+    width: 45%;
+    padding: 10px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  .btn-secondary {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #218838;
+  }
+  

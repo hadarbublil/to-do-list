@@ -7,9 +7,9 @@ export function Navbar() {
     return (
         <nav>
             <ul>
-                <li><Link to="/">Home</Link></li>
+                {/* <li><Link to="/">Home</Link></li>
                 <li><Link to="/SignUp">SignUp</Link></li>
-                <li><Link to="/tasks">My Tasks</Link></li> 
+                <li><Link to="/tasks">My Tasks</Link></li>  */}
                 <li><SignOutButton /></li> 
             </ul>
         </nav>

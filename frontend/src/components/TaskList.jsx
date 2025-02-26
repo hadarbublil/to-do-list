@@ -107,7 +107,7 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
         </tbody>
       </table>
       {/* Pagination Controls */}
-      <div className="d-flex justify-content-center mt-3">
+      <div className="d-flex justify-content-center mt-3 mb-4">
         <button
           className="btn btn-outline-primary mr-2 mx-2"
           onClick={() => goToPage(currentPage - 1)}

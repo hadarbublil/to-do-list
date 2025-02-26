@@ -1,31 +1,38 @@
-// src/components/HomePage.js
-import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import "./HomePage.css"; 
 
 const HomePage = () => {
-  console.log("i am in home page");
+  console.log("I am in home page");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
-      navigate('/tasks'); 
+      navigate("/tasks");
     }
-  }, [user, navigate]); 
-
+  }, [user, navigate]);
 
   return (
-    <div className="container text-center">
-      <h2>Welcome to the To-Do List App</h2>
-      <p>Please sign in or sign up to continue.</p>
-      <div>
-        <button className="btn btn-primary" onClick={() => navigate('/login')}>
-          Sign In
-        </button>
-        <button className="btn btn-secondary" onClick={() => navigate('/signup')}>
-          Sign Up
-        </button>
+    <div className="homepage-container">
+      <div className="homepage-content">
+        <h2>Welcome to Tasks Manager</h2>
+        <p>Please sign in or sign up to continue.</p>
+        <div className="button-group">
+          <button
+            className="btn-primary"
+            onClick={() => navigate("/login")}
+          >
+            Sign In
+          </button>
+          <button
+            className="btn-secondary"
+            onClick={() => navigate("/signup")}
+          >
+            Sign Up
+          </button>
+        </div>
       </div>
     </div>
   );

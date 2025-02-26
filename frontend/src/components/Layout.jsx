@@ -1,13 +1,16 @@
 import { Navbar } from "./Navbar";
 import { Outlet } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import React, { useContext } from "react";
 
 export function Layout() {
+    const { user } = useContext(AuthContext);
     return (
-        <>
-            <Navbar />
-            <main>
+        <div className="layout-container">
+            {user &&<Navbar />}
+            <div className="content">
                 <Outlet />
-            </main>
-        </>
+            </div>
+        </div>
     );
 }

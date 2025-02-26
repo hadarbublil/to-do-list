@@ -1,10 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AddTask from './AddTask';
 import TaskList from './TaskList';
 import EditTask from './EditTask';
 import { getAllTasks } from '../services/tasksApi';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const TaskManager = () => {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigate('/'); 
+    }
+  }, [user, navigate]); 
+
   const UIState = {
     ADD_TASK: 'ADD_TASK',
     EDIT_TASK: 'EDIT_TASK',
@@ -30,12 +41,12 @@ const TaskManager = () => {
   };
 
   return (
-    <div className="container">
-      <div className="d-flex align-items-center mb-4">
+    <div className="container d-flex flex-column">
+      <div className="d-flex justify-content-end mb-4 ">
         {currentState === UIState.NONE && (
           <button
-            className="btn btn-primary btn-lg ml-auto"
-            style={{ position: 'absolute' }}
+            className="btn btn-primary btn-lg ml-auto mt-4"
+            style={{ width: '200px'}}
             onClick={handleAddTaskClick}
           >
             Add Task
@@ -49,7 +60,7 @@ const TaskManager = () => {
 
       {currentState === UIState.ADD_TASK && <AddTask onClose={handleClose} />}
 
-      <h2 className="text-dark font-weight-bold text-center flex-grow-1">Tasks List</h2>
+      <h2 className="text-dark font-weight-bold text-center flex-grow-1 mt-4">Tasks List</h2>
       <TaskList onEdit={handleEdit} tasks={tasks} setTasks={setTasks} />
     </div>
   );
