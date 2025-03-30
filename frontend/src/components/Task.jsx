@@ -25,7 +25,7 @@ const Task = ({ task, onDelete, onEdit }) => {
       </td>
       <td className='text-center' style={{verticalAlign: "middle"}}>{task.assigned_user_id}</td>
       <td>
-        <div style={{ display: "flex", gap: "5px", flexWrap: "wrap", justifyContent: "center" }}>
+        <div style={{ display: "flex", gap: "5px", flexWrap: "wrap" }}>
           <button className="btn btn-outline-success custom-border task-btn" data-bs-toggle="button" onClick={() => onEdit(task)}>Edit</button>
           <button className="btn btn-outline-danger custom-border task-btn" onClick={() => onDelete(task.task_id)}>Delete</button>
         </div>
