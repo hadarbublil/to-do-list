@@ -30,7 +30,10 @@
     white-space: nowrap;
 }
   
-
+.text-center-td {
+    text-align: left;
+    vertical-align: middle;
+}
 
 /* Priority colors */
 .priority-1 { /* Low */
