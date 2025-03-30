@@ -23,6 +23,14 @@
     text-overflow: ellipsis; 
 }
 
+.task-btn {
+    width: 80px;  
+    min-width: 80px; 
+    text-align: center;
+    white-space: nowrap;
+}
+  
+
 
 /* Priority colors */
 .priority-1 { /* Low */

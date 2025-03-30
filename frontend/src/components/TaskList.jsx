@@ -81,7 +81,7 @@ const TaskList = ({ onEdit, tasks, setTasks }) => {
           onChange={(e) => setFilter(e.target.value)}
         />
       </div>
-      <table className="table table-striped table-hover">
+      <table className="table table-striped table-hover" style={{ tableLayout: "fixed", width: "100%" }}>
         <thead>
           <tr className="text-left">
             <th onClick={() => handleSort('title')}>Title</th>

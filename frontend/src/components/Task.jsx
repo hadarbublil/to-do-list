@@ -25,8 +25,10 @@ const Task = ({ task, onDelete, onEdit }) => {
       </td>
       <td>{task.assigned_user_id}</td>
       <td>
-        <button className="btn btn-outline-success custom-border me-3" data-bs-toggle="button" onClick={() => onEdit(task)}>Edit</button>
-        <button className="btn btn-outline-danger custom-border" onClick={() => onDelete(task.task_id)}>Delete</button>
+        <div style={{ display: "flex", gap: "5px", flexWrap: "wrap", justifyContent: "center" }}>
+          <button className="btn btn-outline-success custom-border task-btn" data-bs-toggle="button" onClick={() => onEdit(task)}>Edit</button>
+          <button className="btn btn-outline-danger custom-border task-btn" onClick={() => onDelete(task.task_id)}>Delete</button>
+        </div>
       </td>
     </tr>
   );
