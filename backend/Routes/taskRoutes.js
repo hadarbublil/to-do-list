@@ -23,9 +23,10 @@ router.post('/tasks',authenticate, async (req, res) => {
       const { task } = req.body;  
       if (!task || !task.title || !task.due_date) {
         console.log("Received task data:", task);
-          return res.status(400).json({ error: 'Missing required fields' });
+        return res.status(400).json({ error: 'Missing required fields' });
       }
       validateDueDate(task.due_date);
+      
       const createdTask = await addTask(task);
 
       res.status(201).json({ message: 'Task created successfully', task: createdTask });

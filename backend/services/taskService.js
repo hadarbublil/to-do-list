@@ -21,7 +21,7 @@ export const addTask = async (task) => {
       assigned_user_id: task.assignedUser,
       priority_id: task.priority,
       status_id: task.status,
-      channel_id: user.channel_id, 
+      // channel_id: user.channel_id, 
     });
   };
   
